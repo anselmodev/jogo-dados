@@ -1,0 +1,193 @@
+/* Desenvolvido por Anselmo Lima - Projeto Faculdade */
+
+/* ------------ RESET ------------ */
+body, main, section, article div, span, p, h1, h2, h3, h4, h5, h6,
+button, label, select, input {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: black;
+    overflow: hidden;
+    font-family: "Helvetica Neue", monospace;
+}
+
+/* ------------ MAIN ------------ */
+.container {
+    width: 100%;
+    height: 100%;
+    background: url("../images/bg1.jpg");
+    background-size: 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ------------ BOXES ------------ */
+.box-game {
+    width: 860px;
+    height: 600px;
+    background-color: rgba(255, 255, 255, 0.9);
+    -webkit-box-shadow: 0px 14px 30px 6px rgba(50, 50, 50, 0.95);
+    -moz-box-shadow: 0px 14px 30px 6px rgba(50, 50, 50, 0.95);
+    box-shadow: 0px 14px 30px 6px rgba(50, 50, 50, 0.95);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* ------------ TITLES ------------ */
+.box-title {
+    width: 100%;
+    height: 50px;
+    color: #50617B;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    /*padding: 40px 0;*/
+    margin-bottom: 40px;
+}
+
+.box-title h1 {
+    font-size: 20px;
+    font-weight: normal;
+}
+
+.box-title h4 {
+    font-size: 15px;
+    font-style: italic;
+    font-weight: normal;
+    opacity: 0.7;
+}
+
+/* ------------ BUTTONS ------------ */
+.btn {
+    min-width: 100px;
+    height: 40px;
+    line-height: 20px;
+    background-color: transparent;
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 0 40px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn:active {
+    transform: scale(0.93);
+}
+
+.btn:focus {
+    outline: none;
+}
+
+.btn-primary {
+    background-color: #50617B;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #3d5478;
+}
+
+.btn-secondary {
+    background-color: rgba(80, 97, 123, 0.2);
+    color: #50617B;
+}
+
+.btn-secondary:hover {
+    background-color: rgba(80, 97, 123, 0.5);
+}
+
+.btn-border {
+    background-color: transparent;
+    color: #50617B;
+    border: 1px solid #50617B;
+}
+
+.btn-border:hover {
+    background-color: rgba(80, 97, 123, 0.2);
+}
+
+
+/* ------------ FORMS ------------ */
+.form-register-players {
+    width: 460px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.form-input-group {
+    min-width: 300px;
+    max-width: 460px;
+    height: 65px;
+    position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 15px 0;
+}
+
+.form-input-label {
+    width: 100%;
+    font-size: 14px;
+    color: #707070;
+}
+.form-input-label p{
+    padding: 8px 0;
+}
+
+.form-input-controller {
+    width: 100%;
+    height: 40px;
+    line-height: 20px;
+    padding: 0 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+    color: #2a2c32;
+    border: 1px solid #C9C9C9;
+}
+
+.form-input-controller:focus {
+    outline: none;
+    background-color: rgba(80, 97, 123, 0.05);
+}
+.input-points {
+    width: 110px;
+}
+
+.form-select {
+    width: 100%;
+}
+
+
+/* ------------ FOOTER ------------ */
+.footer-main {
+    width: 100%;
+    height: 20px;
+    position: absolute;
+    bottom: 0;
+    opacity: 0.6;
+    margin-bottom: 10px;
+}
+
+.footer-main p {
+    text-align: center;
+    color: white;
+    font-size: 12px;
+    font-style: italic;
+}

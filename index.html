@@ -1,0 +1,91 @@
+<!-- Desenvolvido por Anselmo Lima - Projeto Faculdade -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Desafio dos Dados</title>
+
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+<!-- container -->
+<main class="container">
+
+  <!-- Box Game -->
+  <section class="box-game">
+    <header class="box-title">
+      <h1>Desafio dos Dados</h1>
+      <h4>Bem Vindo(a)</h4>
+    </header>
+
+    <!-- BOX INSCRIÇÕES -->
+    <article class="form-register-players">
+
+      <!-- Inscrição Jopgador 1 -->
+      <div class="form-input-group">
+        <label class="form-input-label">
+          <p>Jogador 1</p>
+          <input class="form-input-controller" type="text" placeholder="Digite o Nome / Apelido ...">
+        </label>
+      </div>
+
+      <!-- Inscrição Jopgador 2 -->
+      <div class="form-input-group">
+        <label class="form-input-label">
+          <p>Jogador 2</p>
+          <input class="form-input-controller" type="text" placeholder="Digite o Nome / Apelido ...">
+        </label>
+      </div>
+
+      <!-- Tipo de Pontuação -->
+      <div class="form-input-group">
+        <label class="form-input-label">
+          <p>Tipo de Pontuação</p>
+          <select class="form-input-controller form-select">
+            <option value="0" disabled selected>Selecione o tipo de pontuação ...</option>
+            <option value="1">Somatória de Pontos</option>
+            <option value="2">Subtração de Pontos</option>
+          </select>
+        </label>
+      </div>
+
+      <!-- Limite de Pontos -->
+      <div class="form-input-group">
+        <label class="form-input-label">
+          <p>Limite de Pontos</p>
+          <input class="form-input-controller input-points" type="text" placeholder="Digite ..." value="10">
+        </label>
+      </div>
+
+      <!-- Scores e iniciar Jogo -->
+      <div class="form-input-group">
+        <button class="btn btn-border">Scores</button>
+        <button class="btn btn-primary">Iniciar Jogo</button>
+      </div>
+
+    </article>
+
+
+    <!-- BOX SCORES -->
+    <article class="form-score-players">
+
+    </article>
+
+    <!-- BOX HOME -->
+    <article class="form-score-players">
+
+    </article>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer-main">
+    <p>Anselmo Lima - by Uninove</p>
+  </footer>
+
+</main>
+
+<script src="assets/js/scripts-game.js"></script>
+
+</body>
+</html>
