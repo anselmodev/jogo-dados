@@ -13,20 +13,24 @@
 <main class="container">
 
   <!-- Box Game -->
-  <section class="box-game">
-    <header class="box-title">
+  <section class="box-game" id="box">
+    <header class="box-title" id="title">
+
       <h1>Desafio dos Dados</h1>
-      <h4>Bem Vindo(a)</h4>
+      <h4 id="subtitle">
+        Bem Vindo, Jogadores!
+      </h4>
+
     </header>
 
     <!-- BOX INSCRIÇÕES -->
-    <article class="form-register-players">
+    <article class="form-register-players" id="register">
 
       <!-- Inscrição Jopgador 1 -->
       <div class="form-input-group">
         <label class="form-input-label">
           <p>Jogador 1</p>
-          <input class="form-input-controller" type="text" placeholder="Digite o Nome / Apelido ...">
+          <input id="p1Name" class="form-input-controller" type="text" placeholder="Digite o Nome / Apelido ...">
         </label>
       </div>
 
@@ -34,7 +38,7 @@
       <div class="form-input-group">
         <label class="form-input-label">
           <p>Jogador 2</p>
-          <input class="form-input-controller" type="text" placeholder="Digite o Nome / Apelido ...">
+          <input id="p2Name" class="form-input-controller" type="text" placeholder="Digite o Nome / Apelido ...">
         </label>
       </div>
 
@@ -42,7 +46,7 @@
       <div class="form-input-group">
         <label class="form-input-label">
           <p>Tipo de Pontuação</p>
-          <select class="form-input-controller form-select">
+          <select id="pointsType" class="form-input-controller form-select">
             <option value="0" disabled selected>Selecione o tipo de pontuação ...</option>
             <option value="1">Somatória de Pontos</option>
             <option value="2">Subtração de Pontos</option>
@@ -54,26 +58,90 @@
       <div class="form-input-group">
         <label class="form-input-label">
           <p>Limite de Pontos</p>
-          <input class="form-input-controller input-points" type="text" placeholder="Digite ..." value="10">
+          <input id="pointsNumber" class="form-input-controller input-points" type="text" placeholder="Digite ..." value="10">
         </label>
       </div>
 
       <!-- Scores e iniciar Jogo -->
-      <div class="form-input-group">
+      <div class="form-input-group btn-group">
         <button class="btn btn-border">Scores</button>
         <button class="btn btn-primary">Iniciar Jogo</button>
       </div>
 
     </article>
 
-
     <!-- BOX SCORES -->
-    <article class="form-score-players">
+    <article class="score-players" id="scores">
 
+      <ul class="score-list">
+        <li>
+          <b>Jogador 1</b> - venceu em ( 14 rodadas )
+        </li>
+
+        <li>
+          <b>Jogador 2</b> - venceu em ( 8 rodadas )
+        </li>
+      </ul>
+
+      <!-- Voltar Inscrição -->
+      <div class="form-input-group btn-group">
+        <button class="btn btn-border">Voltar</button>
+      </div>
     </article>
 
     <!-- BOX HOME -->
-    <article class="form-score-players">
+    <article class="home-game" id="game">
+      <div class="players-info">
+
+        <!-- Joagador 1 -->
+        <div class="dice-container">
+          <p class="player-name" id="playe1-name">
+            Jogador 1
+          </p>
+
+          <div class="player-dice-3d" id="player1-dice">
+            <!-- Dados em 3D -->
+          </div>
+
+          <p class="player-points" id="player1-points">
+            <em>Pontos</em>
+            <span>00</span>
+          </p>
+
+          <button class="btn btn-secondary" id="player1-launch">
+            Lançar Dado
+          </button>
+        </div>
+
+        <p class="vsplayer">VS</p>
+
+        <!-- Joagador 2 -->
+        <div class="dice-container">
+          <p class="player-name" id="playe2-name">
+            Jogador 2
+          </p>
+
+          <div class="player-dice-3d" id="player2-dice">
+            <!-- Dados em 3D -->
+          </div>
+
+          <p class="player-points" id="player2-points">
+            <em>Pontos</em>
+            <span>00</span>
+          </p>
+
+          <button class="btn btn-secondary" id="player2-launch">
+            Lançar Dado
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Reiniciar / Finalizar Jogo -->
+      <div class="form-input-group btn-group">
+        <button class="btn btn-border">Reiniciar Jogo</button>
+        <button class="btn btn-primary">Finalizar Jogo</button>
+      </div>
 
     </article>
   </section>
@@ -85,6 +153,7 @@
 
 </main>
 
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="assets/js/scripts-game.js"></script>
 
 </body>
