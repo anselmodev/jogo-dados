@@ -1,8 +1,8 @@
 /* Desenvolvido por Anselmo Lima - Projeto Faculdade */
 
 /* ------------ RESET ------------ */
-body, main, section, article div, span, p, h1, h2, h3, h4, h5, h6,
-button, label, select, input {
+body, main, section, article div, span, p, b, span, em, h1,
+h2, h3, h4, h5, h6, button, label, select, input {
   margin: 0;
   padding: 0;
 }
@@ -16,6 +16,7 @@ body {
   background-color: black;
   overflow: hidden;
   font-family: "Helvetica Neue", monospace;
+  box-sizing: border-box;
 }
 
 /* ------------ MAIN ------------ */
@@ -86,7 +87,7 @@ body {
   background-color: transparent;
   border: none;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   text-transform: uppercase;
   padding: 0 30px;
   cursor: pointer;
@@ -95,6 +96,11 @@ body {
 
 .btn:active {
   transform: scale(0.93);
+}
+.btn:disabled {
+  opacity: 0.5;
+  user-select: none;
+  cursor: not-allowed;
 }
 
 .btn:focus {
@@ -135,7 +141,7 @@ body {
 
 /* box register */
 #register {
-  display: flex;
+  display: none;
 }
 
 /* box game */
@@ -183,13 +189,178 @@ body {
   margin: 10px 0;
 }
 
+/* ------------ DICE 3D ( dado ) ------------ */
 .player-dice-3d {
   width: 170px;
   height: 170px;
   background-color: white;
   border: 1px solid #C9C9C9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 240px;
 }
 
+.dice {
+  width: 120px;
+  height: 120px;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: translateZ(-60px);
+  transition: transform 0.7s;
+}
+
+.dice__face {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border: 1px solid #aa0303;
+  line-height: 120px;
+  font-size: 40px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dice__number--1,
+.dice__number--3,
+.dice__number--2,
+.dice__number--4,
+.dice__number--5,
+.dice__number--6 {
+  background-color: rgba(255, 90, 90, 1);
+}
+
+.dice__number--1 {
+  transform: rotateY(0deg) translateZ(60px);
+}
+
+.dice__number--3 {
+  transform: rotateY(90deg) translateZ(60px);
+}
+
+.dice__number--2 {
+  transform: rotateY(180deg) translateZ(60px);
+}
+
+.dice__number--4 {
+  transform: rotateY(-90deg) translateZ(60px);
+}
+
+.dice__number--5 {
+  transform: rotateX(90deg) translateZ(60px);
+}
+
+.dice__number--6 {
+  transform: rotateX(-90deg) translateZ(60px);
+}
+
+/* dice face numbers */
+.num1, .num2, .num3, .num4, .num5, .num6 {
+  width: 25px;
+  height: 25px;
+  overflow: hidden;
+  text-indent: -9999px;
+  outline: none;
+  user-select: none;
+  background-color: white;
+  border-radius: 20px;
+  position: absolute;
+}
+
+.dice__number--2 .num1, .dice__number--3 .num1,
+.dice__number--4 .num1, .dice__number--5 .num1,
+.dice__number--6 .num1 {
+  bottom: 15px;
+  right: 15px;
+}
+
+.dice__number--2 .num2, .dice__number--3 .num2,
+.dice__number--4 .num2, .dice__number--5 .num2,
+.dice__number--6 .num2{
+  left: 15px;
+  top: 15px;
+}
+
+.dice__number--4 .num3, .dice__number--5 .num3,
+.dice__number--6 .num3{
+  right: 15px;
+  top: 15px;
+}
+
+.dice__number--4 .num4, .dice__number--5 .num5 {
+  left: 15px;
+  bottom: 15px;
+}
+.dice__number--6 .num4 {
+  top: 47px;
+  left: 15px;
+}
+.dice__number--6 .num5 {
+  right: 15px;
+  bottom: 47px;
+}
+.dice__number--6 .num6 {
+  left: 15px;
+  bottom: 15px;
+}
+
+.dice.show-1 {
+  transform: translateZ(-60px) rotateY(0deg);
+}
+
+.dice.show-2 {
+  transform: translateZ(-60px) rotateY(-180deg);
+}
+
+.dice.show-3 {
+  transform: translateZ(-60px) rotateY(-90deg);
+}
+
+.dice.show-4 {
+  transform: translateZ(-60px) rotateY(90deg);
+}
+
+.dice.show-5 {
+  transform: translateZ(-60px) rotateX(-90deg);
+}
+
+.dice.show-6 {
+  transform: translateZ(-60px) rotateX(90deg);
+}
+
+.dice-launch {
+  animation: animate-dice-launch 1s infinite;
+}
+
+/* dice launch animation ( right, top, left, bottom ) */
+@keyframes animate-dice-launch {
+  /*right*/
+  0% {
+    transform: translateZ(-60px) rotateY(-90deg);
+  }
+  /*top*/
+  25% {
+    transform: translateZ(-60px) rotateX(-90deg);
+  }
+  /*bottom*/
+  50% {
+    transform: translateZ(-60px) rotateX(90deg);
+  }
+  /*back*/
+  75% {
+    transform: translateZ(-60px) rotateY(-180deg);
+  }
+  /*front*/
+  100% {
+    transform: translateZ(-60px) rotateY(0deg);
+  }
+}
+
+/* player points */
 .player-points {
   width: 100%;
   height: 75px;
@@ -277,6 +448,11 @@ body {
   width: 100%;
 }
 
+/* ------------ HELPERS ------------ */
+/* show box */
+.show-box {
+  display: flex !important;
+}
 
 /* ------------ FOOTER ------------ */
 .footer-main {

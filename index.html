@@ -16,7 +16,7 @@
   <section class="box-game" id="box">
     <header class="box-title" id="title">
 
-      <h1>Desafio dos Dados</h1>
+      <h1>Jogo dos Dados</h1>
       <h4 id="subtitle">
         Bem Vindo, Jogadores!
       </h4>
@@ -47,9 +47,9 @@
         <label class="form-input-label">
           <p>Tipo de Pontuação</p>
           <select id="pointsType" class="form-input-controller form-select">
-            <option value="0" disabled selected>Selecione o tipo de pontuação ...</option>
-            <option value="1">Somatória de Pontos</option>
-            <option value="2">Subtração de Pontos</option>
+            <option value="none" disabled selected>Selecione o tipo de pontuação ...</option>
+            <option value="inc">Somatória de Pontos</option>
+            <option value="dec">Subtração de Pontos</option>
           </select>
         </label>
       </div>
@@ -58,14 +58,15 @@
       <div class="form-input-group">
         <label class="form-input-label">
           <p>Limite de Pontos</p>
-          <input id="pointsNumber" class="form-input-controller input-points" type="text" placeholder="Digite ..." value="10">
+          <input id="pointsLimit" class="form-input-controller input-points" type="text" placeholder="Digite ..."
+                 value="10">
         </label>
       </div>
 
       <!-- Scores e iniciar Jogo -->
       <div class="form-input-group btn-group">
-        <button class="btn btn-border">Scores</button>
-        <button class="btn btn-primary">Iniciar Jogo</button>
+        <button id="showScores" class="btn btn-border">Scores</button>
+        <button id="startGame" class="btn btn-primary">Iniciar Jogo</button>
       </div>
 
     </article>
@@ -85,7 +86,7 @@
 
       <!-- Voltar Inscrição -->
       <div class="form-input-group btn-group">
-        <button class="btn btn-border">Voltar</button>
+        <button id="backToGame" class="btn btn-border">Voltar</button>
       </div>
     </article>
 
@@ -95,20 +96,54 @@
 
         <!-- Joagador 1 -->
         <div class="dice-container">
-          <p class="player-name" id="playe1-name">
+          <p class="player-name" id="playe1Name">
             Jogador 1
           </p>
 
           <div class="player-dice-3d" id="player1-dice">
-            <!-- Dados em 3D -->
+            <div class="dice" id="dice1">
+              <div class="dice__face dice__number--1">
+                <p class="num1">1</p>
+              </div> <!-- front -->
+              <div class="dice__face dice__number--2">
+                <p class="num1">1</p>
+                <p class="num2">2</p>
+              </div> <!-- back -->
+              <div class="dice__face dice__number--3">
+                <p class="num1">1</p>
+                <p class="num2">2</p>
+                <p class="num3">3</p>
+              </div> <!-- right -->
+              <div class="dice__face dice__number--4">
+                <p class="num1">1</p>
+                <p class="num2">2</p>
+                <p class="num3">3</p>
+                <p class="num4">4</p>
+              </div> <!-- left -->
+              <div class="dice__face dice__number--5">
+                <p class="num1">1</p>
+                <p class="num2">2</p>
+                <p class="num3">3</p>
+                <p class="num4">4</p>
+                <p class="num5">5</p>
+              </div> <!-- top -->
+              <div class="dice__face dice__number--6">
+                <p class="num1">1</p>
+                <p class="num2">2</p>
+                <p class="num3">3</p>
+                <p class="num4">4</p>
+                <p class="num5">5</p>
+                <p class="num6">6</p>
+              </div> <!-- bottom -->
+            </div>
           </div>
 
-          <p class="player-points" id="player1-points">
+          <p class="player-points">
             <em>Pontos</em>
-            <span>00</span>
+            <span id="player1Points">0</span>
           </p>
 
-          <button class="btn btn-secondary" id="player1-launch">
+          <button id="player1Launch" class="btn btn-secondary">
             Lançar Dado
           </button>
         </div>
@@ -117,20 +152,54 @@
 
         <!-- Joagador 2 -->
         <div class="dice-container">
-          <p class="player-name" id="playe2-name">
+          <p class="player-name" id="playe2Name">
             Jogador 2
           </p>
 
           <div class="player-dice-3d" id="player2-dice">
-            <!-- Dados em 3D -->
+            <div class="dice" id="dice2">
+              <div class="dice__face dice__number--1">
+                <p class="num1">1</p>
+              </div> <!-- front -->
+              <div class="dice__face dice__number--2">
+                <p class="num1">1</p>
+                <p class="num2">2</p>
+              </div> <!-- back -->
+              <div class="dice__face dice__number--3">
+                <p class="num1">1</p>
+                <p class="num2">2</p>
+                <p class="num3">3</p>
+              </div> <!-- right -->
+              <div class="dice__face dice__number--4">
+                <p class="num1">1</p>
+                <p class="num2">2</p>
+                <p class="num3">3</p>
+                <p class="num4">4</p>
+              </div> <!-- left -->
+              <div class="dice__face dice__number--5">
+                <p class="num1">1</p>
+                <p class="num2">2</p>
+                <p class="num3">3</p>
+                <p class="num4">4</p>
+                <p class="num5">5</p>
+              </div> <!-- top -->
+              <div class="dice__face dice__number--6">
+                <p class="num1">1</p>
+                <p class="num2">2</p>
+                <p class="num3">3</p>
+                <p class="num4">4</p>
+                <p class="num5">5</p>
+                <p class="num6">6</p>
+              </div> <!-- bottom -->
+            </div>
           </div>
 
-          <p class="player-points" id="player2-points">
+          <p class="player-points">
             <em>Pontos</em>
-            <span>00</span>
+            <span id="player2Points">0</span>
           </p>
 
-          <button class="btn btn-secondary" id="player2-launch">
+          <button id="player2Launch" class="btn btn-secondary">
             Lançar Dado
           </button>
         </div>
@@ -139,8 +208,8 @@
 
       <!-- Reiniciar / Finalizar Jogo -->
       <div class="form-input-group btn-group">
-        <button class="btn btn-border">Reiniciar Jogo</button>
-        <button class="btn btn-primary">Finalizar Jogo</button>
+        <button id="restartGame" class="btn btn-border">Reiniciar Jogo</button>
+        <button id="endGame" class="btn btn-primary">Finalizar Jogo</button>
       </div>
 
     </article>
@@ -153,7 +222,6 @@
 
 </main>
 
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="assets/js/scripts-game.js"></script>
 
 </body>
