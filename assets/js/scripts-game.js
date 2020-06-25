@@ -1,7 +1,6 @@
 /*Desenvolvido por Anselmo Lima - Projeto Faculdade*/
 // ---------- VARIABLES ----------
-let scores = null,
-    pointslimit = 0,
+let pointslimit = 0,
     rounds = 0,
     pointsType = null,
     players = {
@@ -20,48 +19,23 @@ let scores = null,
     currentSideDice2 = '',
     player1Dice = 0,
     player2Dice = 0,
-    playersHistoric = [],
     endGame = false;
 
 
 // ---------- ELEMENTS HTML ----------
-const SUBTITLE = document.getElementById('subtitle');
 const PLAYER1_NAME = document.getElementById('p1Name');
 const PLAYER2_NAME = document.getElementById('p2Name');
 const POINTS_TYPE = document.getElementById('pointsType');
 const POINTS_LIMIT = document.getElementById('pointsLimit');
-
-const BTN_SCORES = document.getElementById('showScores');
+const ROUNDS = document.getElementById('rounds');
+const ROUNDS_LIST = document.getElementById('roundList');
 const BTN_START_GAME = document.getElementById('startGame');
-const BTN_EXIT_SCORES = document.getElementById('backToGame');
-const BTN_PL1_LAUNCH = document.getElementById('player1Launch');
-const BTN_PL2_LAUNCH = document.getElementById('player2Launch');
+const BTN_LAUNCH = document.getElementById('playersLaunch');
 const BTN_RESTART_GAME = document.getElementById('restartGame');
 const BTN_END_GAME = document.getElementById('endGame');
 
 // SHOW REGISTER BOX
 showBoxes('register', true);
-
-// ---------- LOCAL STORAGE SCORES ----------
-function getScores() {
-    const scoresNow = localStorage.getItem('scores');
-    return JSON.parse(scoresNow);
-}
-
-function setScores(player1, player2) {
-    const mountScores = JSON.stringify({
-        p1: {
-            rounds: player1.rounds,
-            points: player1.points
-        },
-        p2: {
-            rounds: player2.rounds,
-            points: player2.points
-        },
-    });
-    localStorage.setItem('scores', mountScores);
-}
-
 
 // ---------- HELPERS ----------
 // lock buttons
@@ -116,8 +90,7 @@ function updatePoints(player) {
             alert('Jogador(a) ' + WINNER_NAME + ' venceu!');
 
             // lock game
-            lockBtn('player1Launch', true);
-            lockBtn('player2Launch', true);
+            lockBtn('playersLaunch', true);
             endGame = true;
 
         }, 1000);
@@ -125,8 +98,7 @@ function updatePoints(player) {
 
     // enable launch buttons and reset round
     if (!endGame) {
-        lockBtn('player1Launch');
-        lockBtn('player2Launch');
+        lockBtn('playersLaunch');
 
         resetRound();
     }
@@ -134,50 +106,20 @@ function updatePoints(player) {
 }
 
 // Update historic
-function updateHistoric() {
-    playersHistoric.unshift('Rodada 1: Anselmo ganhou de 5 a 3.')
-}
+function updateHistoric(playerWinner, roundsUpdate) {
+    rounds = rounds +1;
+    const GET_PLAYER_NAME = playerWinner === 1 ? players.p1.name : players.p2.name;
 
-// ---------- REGISTER PLAYERS ----------
-function registerPlayers(player1Name, player2Name) {
-    if (player1Name.length < 3 || player2Name.length < 3) {
-        alert("É obrigatório o registro dos jogadores! \n\n (Mínimo de 3 caracteres)")
+    if (playerWinner === 0) {
+        ROUNDS_LIST.innerHTML += '<p> Rodada ' + rounds + ':  <b>empate</b>.' + '</p>';
     } else {
-        players.p1.name = player1Name;
-        players.p2.name = player2Name;
+        ROUNDS_LIST.innerHTML += '<p> Rodada ' + rounds + ': <b>' + GET_PLAYER_NAME + '</b> venceu!</p>';
     }
+
+    ROUNDS_LIST.scrollTop = ROUNDS_LIST.scrollHeight;
 }
-
-
-// ---------- POINTS TYPE ----------
-function setPointsType() {
-    if (!type || type === '0') {
-        alert('Defina o tipo de pontos para os jogadores!')
-    } else if (type === '1') {
-        pointsType = 1
-    } else if (type === '2') {
-        pointsType = 2
-    }
-}
-
-
-// ---------- POINTS TO PLAYERS ----------
-function setPointsWinnerPlayer(points) {
-    if (!points || points !== 0) {
-        alert('Defina a quantidade de pontos para os jogadores!');
-    } else {
-        pointslimit = points;
-        players.p1.currentPoints = points;
-        players.p2.currentPoints = points;
-    }
-}
-
 
 // ---------- ROUNDS ----------
-function setRounds(roundNumber) {
-    rounds++;
-}
-
 function resetRound(end) {
     // reset last dice and launched
     players.p1.launched = false;
@@ -207,8 +149,7 @@ function resetRound(end) {
         document.getElementById('player2Points').innerText = actualPoints;
 
         // enabled buttons
-        lockBtn('player1Launch');
-        lockBtn('player2Launch');
+        lockBtn('playersLaunch');
     }
 
 }
@@ -217,11 +158,11 @@ function resetRound(end) {
 // ---------- COMPARE RESULTS ----------
 function compareDiceWinner() {
     if (player1Dice > player2Dice) {
-        return 1;
+        return 1; // player 1 winner
     } else if (player2Dice > player1Dice) {
-        return 2
+        return 2; // player 2 winner
     } else {
-        return 0;
+        return 0; // draw game
     }
 }
 
@@ -231,33 +172,26 @@ function calcResults() {
 
         if (WINNER === 0) {
             updatePoints();
+
+            updateHistoric(WINNER);
             return false;
         }
 
         // remove points from loser
         if (pointsType === 'dec') {
             WINNER === 1 ? updatePoints(2) : updatePoints(1);
+
+            updateHistoric(WINNER);
         }
 
         // add points to winner
         else if (pointsType === 'inc') {
             WINNER === 1 ? updatePoints(1) : updatePoints(2);
+
+            updateHistoric(WINNER);
         }
 
     }
-}
-
-
-// ---------- NEW GAME ----------
-function setNewGame() {
-    scores = null;
-    pointslimit = 0;
-    rounds = 0;
-    pointsType = null;
-    players.p1.name = null;
-    players.p2.name = null;
-    players.p1.currentPoints = 0;
-    players.p2.currentPoints = 0;
 }
 
 
@@ -353,16 +287,6 @@ function setPlayerWinner() {
 }
 
 
-// ---------- PLAYER WINNER TO SCORE ----------
-function setPlayerWinnerScore(player) {
-    if (player === 1) {
-
-    } else if (player === 2) {
-
-    }
-}
-
-
 // ---------- BUTTONS ACTIONS GAME ----------
 POINTS_TYPE.addEventListener('change', function () {
     pointsType = this.value;
@@ -394,6 +318,7 @@ BTN_START_GAME.addEventListener('click', function () {
         // go to box game
         showBoxes('register');
         showBoxes('game', true);
+        ROUNDS.classList.add('rounds-container-show');
 
         // Set players name
         document.getElementById('playe1Name').innerText = p1Name;
@@ -407,24 +332,13 @@ BTN_START_GAME.addEventListener('click', function () {
     }
 });
 
-BTN_SCORES.addEventListener('click', function () {
-    showBoxes('register');
-    showBoxes('scores', true);
-});
-
-BTN_EXIT_SCORES.addEventListener('click', function () {
-    showBoxes('scores');
-    showBoxes('register', true);
-});
-
-BTN_PL1_LAUNCH.addEventListener('click', function () {
-    lockBtn('player1Launch', true);
+BTN_LAUNCH.addEventListener('click', function () {
+    lockBtn('playersLaunch', true);
     playDice(1);
-});
 
-BTN_PL2_LAUNCH.addEventListener('click', function () {
-    lockBtn('player2Launch', true);
-    playDice(2);
+    setTimeout(function () {
+        playDice(2);
+    }, 200);
 });
 
 BTN_RESTART_GAME.addEventListener('click', function () {
@@ -435,6 +349,8 @@ BTN_RESTART_GAME.addEventListener('click', function () {
     // Check winner and reset game
     if (!!QUESTION) {
         resetRound(true);
+        ROUNDS_LIST.innerHTML = '';
+        rounds = 0;
     }
 });
 
@@ -459,6 +375,8 @@ BTN_END_GAME.addEventListener('click', function () {
         pointslimit = 0;
         players.p1.currentPoints = 0;
         players.p2.currentPoints = 0;
+        rounds = 0;
+        ROUNDS_LIST.innerHTML = '';
 
         // clean players name
         document.getElementById('playe1Name').innerText = '';
@@ -467,7 +385,7 @@ BTN_END_GAME.addEventListener('click', function () {
         // go to box register
         showBoxes('game');
         showBoxes('register', true);
+        ROUNDS.classList.remove('rounds-container-show');
     }
 
 });
-

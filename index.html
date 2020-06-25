@@ -23,6 +23,14 @@
 
     </header>
 
+    <!--  ROUND HISTORIC  -->
+    <div class="rounds-container" id="rounds">
+      <p class="rounds-title">Rodadas do Jogo</p>
+
+      <div class="rounds-list" id="roundList">
+      </div>
+    </div>
+
     <!-- BOX INSCRIÇÕES -->
     <article class="form-register-players" id="register">
 
@@ -65,29 +73,9 @@
 
       <!-- Scores e iniciar Jogo -->
       <div class="form-input-group btn-group">
-        <button id="showScores" class="btn btn-border">Scores</button>
         <button id="startGame" class="btn btn-primary">Iniciar Jogo</button>
       </div>
 
-    </article>
-
-    <!-- BOX SCORES -->
-    <article class="score-players" id="scores">
-
-      <ul class="score-list">
-        <li>
-          <b>Jogador 1</b> - venceu em ( 14 rodadas )
-        </li>
-
-        <li>
-          <b>Jogador 2</b> - venceu em ( 8 rodadas )
-        </li>
-      </ul>
-
-      <!-- Voltar Inscrição -->
-      <div class="form-input-group btn-group">
-        <button id="backToGame" class="btn btn-border">Voltar</button>
-      </div>
     </article>
 
     <!-- BOX HOME -->
@@ -143,9 +131,9 @@
             <span id="player1Points">0</span>
           </p>
 
-          <button id="player1Launch" class="btn btn-secondary">
-            Lançar Dado
-          </button>
+          <!--          <button id="player1Launch" class="btn btn-secondary">-->
+          <!--            Lançar Dado-->
+          <!--          </button>-->
         </div>
 
         <p class="vsplayer">VS</p>
@@ -199,10 +187,12 @@
             <span id="player2Points">0</span>
           </p>
 
-          <button id="player2Launch" class="btn btn-secondary">
-            Lançar Dado
-          </button>
+
         </div>
+
+        <button id="playersLaunch" class="btn btn-secondary">
+          Lançar Dados
+        </button>
 
       </div>
 
