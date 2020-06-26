@@ -15,7 +15,7 @@ body {
   left: 0;
   background-color: black;
   overflow: hidden;
-  font-family: "Helvetica Neue", monospace;
+  font-family: "Helvetica Neue", 'Open Sans', monospace, sans-serif;
   box-sizing: border-box;
 }
 
